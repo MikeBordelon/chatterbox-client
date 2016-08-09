@@ -17,13 +17,17 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
-      <select id='roomSelect' name="chatrooms">
-        <option value='lobby'>lobby</option>
-      </select>
-      <input type='text' id='message' placeholder='type message'></input>
-      <button id='send' class='submit'>Send</button>
-      <span> This is your current username: <div class='user'></div></span>
-      <!-- Your HTML goes here! -->
+      <div class='rooms'>
+        <select id='roomSelect' name="chatrooms">
+        </select>
+        <input type='text' id='addRoom' placeholder="add room"></input>
+        <button type='submit' id='roomButton' onclick="app.addRoom($('#addRoom').val())">Add Room</button>
+      </div>
+      <div class='chat'>
+        <input type='text' id='message' placeholder='type message' ></input>
+        <button type='submit' id='send' class='submit' onclick="app.handleSubmit()">Send</button>
+        <span> This is your current username: <div class='user'></div></span>
+      </div>
     </div>
     <div id="chats"></div>
   </body>
