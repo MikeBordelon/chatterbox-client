@@ -17,9 +17,12 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
-      <input type='text' id='message' placeholder='type message' onclick='app.send()'></input>
+      <select id='roomSelect' name="chatrooms">
+        <option value='lobby'>lobby</option>
+      </select>
+      <input type='text' id='message' placeholder='type message'></input>
       <button id='send' class='submit'>Send</button>
-      <span> This is your current username: <div></div></span>
+      <span> This is your current username: <div class='user'></div></span>
       <!-- Your HTML goes here! -->
     </div>
     <div id="chats"></div>

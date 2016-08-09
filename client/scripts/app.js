@@ -1,19 +1,23 @@
-// var username = window.location.search.split('=')[1];
+var username = window.location.search.split('=')[1];
 // if (username.indexOf('%20') > -1) {
 //   username = username.split('%20').join(' ');
 // }
 
-// var message = {
-//   username: username,
-//   text: 'default msg',
-//   roomname: 'default'
-// };
+
+var message;
 
 var app = {
   server: 'https://api.parse.com/1/classes/messages'
 };
 
-app.init = function () {};
+app.init = function () {
+  $('.user').text(username);
+  message = {
+    username: username,
+    text: $('#message').val(),
+    roomname: $('#roomSelect').val()
+  };
+};
 
 app.send = function (message) {
   $.ajax({
@@ -28,6 +32,7 @@ app.send = function (message) {
       console.log('Failed to send message:', data);
     }
   });
+
 };
 
 app.fetch = function () {
@@ -56,23 +61,16 @@ app.fetch = function () {
 app.clearMessages = function () {
   $('#chats').empty();
 };
-
 app.addMessage = function (message) {
-  $.ajax({
-    url: app.server,
-    type: 'POST',
-    data: JSON.stringify(message),
-    contentType: 'application/json',
-    success: function (data) {
-      console.log('Successfully sent msg!');
-    }, 
-    error: function (data) {
-      console.log('Failed to send message:', data);
-    }
-  });  
+  var $text = message.username + ': ' + message.text;
+  var $message = $('<div></div>').text($text);
+  $('#chats').append($message); 
 };
 
-app.addRoom = function () {};
+app.addRoom = function (room) {
+  var $room = $('<option value="' + room + '"></option>').text(room);
+  $('#roomSelect').append($room); 
+};
 
 setInterval(app.fetch(), 500);
 // $.ajax({
